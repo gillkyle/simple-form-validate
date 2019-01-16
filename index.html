@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="./functions.js"></script>
+  </head>
+
+  <body>
+    <h1>Homework #4</h1>
+
+    <h4>Form Validation</h4>
+
+    <form onsubmit="return validateForm()">
+      <div class="form-example">
+        <label for="name">Number: </label>
+        <input type="number" name="name" id="name" required />
+      </div>
+      <!--
+        <div class="form-example">
+          <label for="email">Email: </label>
+          <input type="email" name="email" id="email" required />
+        </div>
+      -->
+      <div class="form-example"><input type="submit" value="Validate" /></div>
+    </form>
+    Errors
+    <div id="errors"></div>
+  </body>
+</html>
