@@ -4,6 +4,7 @@
 
 const validate = (function() {
   let valid = true;
+  let errors = [];
 
   return {
     isNumeric: text => {
@@ -71,6 +72,7 @@ const validate = (function() {
     },
     reset: function() {
       valid = true;
+      errors = errors.splice(0, errors.length);
     }
   };
 })();
@@ -79,13 +81,11 @@ function validateForm() {
   console.log("test");
   console.log(document.forms[0].name.value);
 
-  const errors = ["error1", "error2"];
-
   const errorDiv = document.getElementById("errors");
   if (validate.isValid()) {
     errorDiv.innerHTML = "No errors";
   } else {
-    errorDiv.innerHTML = errors.join(", ");
+    errorDiv.innerHTML = validate.errors.join(", ");
   }
   // return false is like a preventDefault, blocking the form submission and page reload
   return false;
