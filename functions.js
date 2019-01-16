@@ -45,7 +45,8 @@ const validate = (function() {
       return valid;
     },
     isNonEmpty: function(text) {
-      isEmpty = !text || text === "" || text === null || text.length === 0;
+      const isEmpty =
+        !text || text === "" || text === null || text.length === 0;
       valid = !isEmpty;
       return valid;
     },
@@ -73,19 +74,36 @@ const validate = (function() {
     reset: function() {
       valid = true;
       errors = errors.splice(0, errors.length);
+    },
+    getErrors: function() {
+      return errors;
     }
   };
 })();
 
 function validateForm() {
-  console.log("test");
-  console.log(document.forms[0].name.value);
+  // pull each form value
+  const contactForm = document.forms[0];
+  const formName = contactForm.name.value;
+  const formAge = contactForm.age.value;
+  const formEmail = contactForm.email.value;
+
+  let errorsLog = [];
+
+  errorsLog.push(validate.isNonEmpty(formName));
+  errorsLog.push(validate.isPositiveInteger(formAge));
+  errorsLog.push(validate.isValidEmail(formEmail));
+  const hadAnError = errorsLog.some(x => x === false);
+
+  console.log(hadAnError);
+
+  console.log(formName, formAge, formEmail);
 
   const errorDiv = document.getElementById("errors");
-  if (validate.isValid()) {
-    errorDiv.innerHTML = "No errors";
+  if (hadAnError) {
+    errorDiv.innerHTML = validate.getErrors.join(", ");
   } else {
-    errorDiv.innerHTML = validate.errors.join(", ");
+    errorDiv.innerHTML = "No errors";
   }
   // return false is like a preventDefault, blocking the form submission and page reload
   return false;
