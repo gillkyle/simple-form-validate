@@ -9,7 +9,7 @@
 
     <h4>Form Validation</h4>
 
-    <form onsubmit="return validateForm()">
+    <form>
       <div class="form-example">
         <label for="name">Name: </label>
         <input type="text" name="name" id="name" required />
@@ -24,9 +24,10 @@
         <input type="email" name="email" id="email" required />
       </div>
 
-      <div class="form-example"><input type="submit" value="Validate" /></div>
+      <div class="form-example">
+        <button onclick="return validateForm()">Validate</button>
+      </div>
     </form>
-    Status
     <div id="errors"></div>
   </body>
 </html>
